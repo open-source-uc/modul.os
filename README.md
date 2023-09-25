@@ -36,12 +36,11 @@
 
 ## Desarrollo Local
 
-Las rutas estandar para el desarrollo local son:
+Las rutas estándar para el desarrollo local son:
 
-- Frontend, construido con Docker: http://localhost:3000
-- Backend, fast api: http://localhost:8000/
-- Documentación interactiva con Swagger UI: http://localhost:8000/docs
-- PGAdmin, administración web de PostgreSQL: http://localhost:5050 (Opcional)
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8000
+- Documentación: http://localhost:8000/docs
 
 ### Con Docker
 

@@ -1,9 +1,7 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from api.dependencies import get_db
 from main import app
-
 
 client = TestClient(app)
 

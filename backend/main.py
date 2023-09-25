@@ -4,12 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from routes import api_router
 
-# from database import engine
-# from models import Base
-
-# Base.metadata.create_all(bind=engine)
-
-
 # REST API Settings
 app = FastAPI(
     title="Modul.os API",
@@ -38,9 +32,11 @@ app.add_middleware(
 
 app.include_router(api_router)
 
+
 @app.get("/")
 async def root():
     return {"status": "OK"}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
