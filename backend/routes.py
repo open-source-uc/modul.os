@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/hello", tags=["hello"])
+api_router = APIRouter()
 
 
-@router.get("/")
+@api_router.get("/hello")
 async def read_hello():
     """
     Endpoint de ejemplo "Hola Mundo"

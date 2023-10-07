@@ -23,8 +23,6 @@
 ### Backend
 
 - [Python](https://www.python.org/downloads/) >= 3.10 (idealmente 3.11)
-- [Docker](https://www.docker.com/).
-- [Docker Compose](https://docs.docker.com/compose/install/).
 - [Poetry](https://python-poetry.org/) para la gestión de paquetes y entornos de Python.
 - `ruff` + `black` para el formateo y linting de Python.
 
@@ -41,16 +39,6 @@ Las rutas estándar para el desarrollo local son:
 - Frontend: http://localhost:3000
 - Backend: http://localhost:8000
 - Documentación: http://localhost:8000/docs
-
-### Con Docker
-
-Inicia el stack con Docker Compose:
-
-```bash
-docker compose up -d
-```
-
-**Nota**: La primera vez que inicies tu stack, podría tardar un minuto. Puedes revisar los logs con `docker-compose logs` o para un servicio específico `docker-compose logs backend`. Y puedes acceder a la consola de un servicio con `docker-compose exec backend bash`.
 
 ### Con Poetry
 
