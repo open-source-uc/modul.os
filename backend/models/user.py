@@ -2,7 +2,7 @@
 Archivo de EJEMPLO para definir el modelo de usuario
 """
 
-from db.database import Base
+from database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 import enum
