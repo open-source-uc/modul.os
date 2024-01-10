@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "API para el proyecto de Modul.os"
 authors = ["OSUC"]
 readme = "README.md"
-packages = [{include = "api_modul"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"

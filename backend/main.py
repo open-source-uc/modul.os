@@ -1,8 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-from routes import api_router
+from routes.users import user_router
 
 # REST API Settings
 app = FastAPI(
@@ -30,7 +29,7 @@ app.add_middleware(
 )
 
 
-app.include_router(api_router)
+app.include_router(user_router)
 
 
 @app.get("/")
