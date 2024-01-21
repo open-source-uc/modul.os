@@ -30,4 +30,5 @@ class BlockDaySchedule(Base):
     availability = Column(Boolean)
     day_schedule_id = Column(Integer, ForeignKey("daySchedules.id"), nullable=False)
     day_schedule = relationship("DaySchedule", back_populates="block_day_schedules")
+    meetings = relationship("Meeting", back_populates="block_day_schedule")
 

@@ -28,6 +28,8 @@ class User(Base):
     # en Relationship uselist=False para que sea 1 a 1. Pero, User puede tener varios perfiles?
     profile = relationship("Profile", back_populates="user", uselist=False)
     day_schedules = relationship("DaySchedule", back_populates="user")
+    groups = relationship("Group", secondary="groupUsers", back_populates="users")
+
 
 class Profile(Base):
     __tablename__ = "profiles"
