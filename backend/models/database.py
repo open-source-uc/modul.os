@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 from dotenv import load_dotenv
 
@@ -15,12 +14,15 @@ user = os.getenv("DB_USERNAME")
 password = os.getenv("DB_PASSWORD")
 name = os.getenv("DB_NAME")
 
-SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg2://{user}@{host}:{port}/{name}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{user}:{password}@{host}:{port}/{name}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={}, future=True
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True)
+
+if engine:
+    print("Conexión exitosa")
 
 Base = declarative_base()
 
@@ -33,3 +35,15 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def get_url() -> str:
+    """
+    Función para obtener url de conexión a la base de datos
+    """
+
+    host = os.getenv("DB_HOST")
+    port = os.getenv("DB_PORT")
+    user = os.getenv("DB_USERNAME")
+    password = os.getenv("DB_PASSWORD")
+    name = os.getenv("DB_NAME")
+    return f"postgresql://{user}:{password}@{host}:{port}/{name}"

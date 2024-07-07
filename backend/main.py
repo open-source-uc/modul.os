@@ -1,7 +1,16 @@
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.users import user_router
+from models import schedule, user, group, meeting
+from models.database import engine
+
+#Database models
+schedule.Base.metadata.create_all(bind=engine)
+user.Base.metadata.create_all(bind=engine)
+group.Base.metadata.create_all(bind=engine)
+meeting.Base.metadata.create_all(bind=engine)
 
 # REST API Settings
 app = FastAPI(

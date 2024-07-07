@@ -2,20 +2,14 @@ from fastapi import APIRouter, Path
 from pydantic import BaseModel
 from typing import List
 
+from schemas.user import User
+
 user_router = APIRouter()
 
 users = []
 """
 Lista de usuarios, mientras no tengamos una base de datos
 """
-
-class User(BaseModel):
-    """
-    Usuarios: nombre, email, password
-    """
-    name: str
-    email: str
-    password: str
 
 @user_router.get("/hello")
 async def read_hello():
