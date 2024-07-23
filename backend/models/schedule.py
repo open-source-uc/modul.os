@@ -10,13 +10,15 @@ class Day(enum.Enum):
     thursday = 4
     friday = 5
 
+
+DayEnum = Enum(Day, name='day_enum', create_type=False)
+
 class DaySchedule(Base):
     __tablename__ = "daySchedules"
-    #La primery key podría ser el id del usuario con day. Ejemplo: 1-monday, 1-tuesday, 1-wednesday, etc.
     id = Column(Integer, primary_key=True, index=True)
-    day = Column(Enum(Day), nullable=False)
+    day = Column(DayEnum, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    user = relationship("User", back_populates="day_schedules") #Falta agregar el back_populates en el modelo User
+    user = relationship("User", back_populates="day_schedules")
     block_day_schedules = relationship("BlockDaySchedule", back_populates="day_schedule")
     
 class BlockDaySchedule(Base):
@@ -31,4 +33,3 @@ class BlockDaySchedule(Base):
     day_schedule_id = Column(Integer, ForeignKey("daySchedules.id"), nullable=False)
     day_schedule = relationship("DaySchedule", back_populates="block_day_schedules")
     meetings = relationship("Meeting", back_populates="block_day_schedule")
-
