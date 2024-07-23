@@ -34,6 +34,24 @@
 
 ## Desarrollo Local
 
+### Con Docker (Altamente recomendado)
+
+Para comenzar el desarrollo con un contenedor docker debes seguir las siguientes instrucciones:
+
+1. Descargar docker desktop en este [link](https://www.docker.com/products/docker-desktop/).
+
+2. Al tener docker instalado correctamente debes correr el siguiente comando para 
+
+```shell
+docker-compose up --build
+```
+3. Ante cualquier error en la configuracion o cambios en el archivo docker-compose.yml ejecutar:
+
+```shell
+docker-compose down
+```
+Este comando eliminara el contenedor para que puedas hacer cambios a este archivo (docker-compose.yml). Luego de un cambio, vuelve a ejecutar el comando del inciso 2.
+
 Las rutas estándar para el desarrollo local son:
 
 - Frontend: http://localhost:3000
