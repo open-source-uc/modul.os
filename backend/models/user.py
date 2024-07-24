@@ -25,11 +25,21 @@ class User(Base):
         deprecated=['md5_crypt']
         ), nullable=False
     )
-    # en Relationship uselist=False para que sea 1 a 1. Pero, User puede tener varios perfiles?
+    # en Relationship uselist=False para que sea 1 a 1. Pero, User puede tener varios perfiles? NO
     profile = relationship("Profile", back_populates="user", uselist=False)
     day_schedules = relationship("DaySchedule", back_populates="user")
     groups = relationship("Group", secondary="groupUsers", back_populates="users")
 
+    def get_role(self):
+        if self.profile:
+            return self.profile.role
+        return None
+        
+    def set_password(self, new_password):
+        self.password = new_password
+
+    def check_password(self, password):
+        return self.password == password
 
 class Profile(Base):
     __tablename__ = "profiles"

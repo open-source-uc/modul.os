@@ -1,10 +1,28 @@
-
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.users import user_router
 from models import schedule, user, group, meeting
 from models.database import engine
+from sqlalchemy import text
+from sqlalchemy.exc import ProgrammingError
+
+def create_enum_type(engine):
+    with engine.connect() as conn:
+        try:
+            conn.execute(text("""
+                DO $$ BEGIN
+                    CREATE TYPE day_enum AS ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday');
+                EXCEPTION
+                    WHEN duplicate_object THEN null;
+                END $$;
+            """))
+            conn.commit()
+        except ProgrammingError:
+            conn.rollback()
+
+# Crear el tipo Enum antes de crear las tablas
+create_enum_type(engine)
 
 #Database models
 schedule.Base.metadata.create_all(bind=engine)
@@ -21,14 +39,7 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-
-#  TODO: if != "development":
-#     app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
-# See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For
-# and https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#defaults
-
 # Middleware Settings
-# ! Esto está bien para la producción, pero no para el desarrollo.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -37,14 +48,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 app.include_router(user_router)
-
 
 @app.get("/")
 async def root():
     return {"status": "OK"}
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
